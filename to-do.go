@@ -24,6 +24,8 @@ func main() {
 			default:
 				fmt.Println("I don't know that command, sorry")
 		}
+	} else {
+		fmt.Println("Please use a command. See '--help'")
 	}
 }
 
@@ -33,7 +35,7 @@ func checkPrevDailyNote() []string {
 		panic(err)
 	}
 
-	now := time.Now()
+	now := time.Now().AddDate(0, 0, -1)
 	mon, day, yer := now.Month(), now.Day(), now.Year()
 	today_file := fmt.Sprintf("%04d-%02d-%02d.md", yer, mon, day)
 	today_filepath := filepath.Join(curr_dir, today_file)
@@ -69,7 +71,7 @@ func write_new_file(unchecked_values []string) error {
 		panic(err)
 	}
 
-	now := time.Now().AddDate(0, 0, 1)
+	now := time.Now()
 	mon, day, yer := now.Month(), now.Day(), now.Year()
 	tomorrow_file := fmt.Sprintf("%04d-%02d-%02d.md", yer, mon, day)
 	tomorrow_filepath := filepath.Join(curr_dir, tomorrow_file)
